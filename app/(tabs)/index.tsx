@@ -1,9 +1,11 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform, View, Text, StatusBar, Button } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import VeriffSdk from '@veriff/react-native-sdk';
+
 
 export default function HomeScreen() {
   return (
@@ -46,6 +48,22 @@ export default function HomeScreen() {
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
       </ThemedView>
+
+      <View style={styles.container}>
+      <Text>Open up App.js to start working on your app!</Text>
+
+      <StatusBar />
+      <Button title='Verify' 
+        onPress={async () => {
+          await VeriffSdk.launchVeriff({
+            sessionUrl:
+              'https://alchemy.veriff.com/v/eyJhbGciOiJIU.....',
+          });
+        }}
+      ></Button>
+    </View>
+
+      
     </ParallaxScrollView>
   );
 }
@@ -66,5 +84,11 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
